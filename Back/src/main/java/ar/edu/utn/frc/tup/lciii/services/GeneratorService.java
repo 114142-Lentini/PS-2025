@@ -6,5 +6,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface GeneratorService {
-    Generator postGenerator(GeneratorDto o);
+    Generator registrationGenerator(GeneratorDto o, String type);
+    Generator withdrawalGenerator(String name);
+    Generator aproveWithdrawalGenerator(Boolean bool, Long id);
+    Generator aproveGenerator(Boolean bool, Long id);
 }

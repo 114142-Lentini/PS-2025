@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GeneratorRepository extends JpaRepository<GeneratorEntity,Long> {
+    GeneratorEntity getGeneratorEntityByName(String name);
 }
