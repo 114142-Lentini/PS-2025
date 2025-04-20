@@ -25,6 +25,8 @@ public class GeneratorEntity {
     private String contact;
     @Column(name = "tipo")
     private String type;
+    @Column(name = "domicilio")
+    private String address;
     @Column(name = "estado")
     private String state;
 }

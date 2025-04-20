@@ -16,5 +16,7 @@ import java.time.LocalDateTime;
 public class GeneratorDto {
     private String name;
     private String email;
-    private String contacto;
+    private String contact;
+    private String address;
+    private String type;
 }

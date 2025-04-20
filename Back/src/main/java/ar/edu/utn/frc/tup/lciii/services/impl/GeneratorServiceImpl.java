@@ -18,18 +18,21 @@ public class GeneratorServiceImpl implements GeneratorService {
     private GeneratorRepository repository;
     @Autowired
     private ModelMapper modelMapper;
-    public Generator registrationGenerator(GeneratorDto o, String type) {
+    public Generator registrationGenerator(GeneratorDto o) {
         GeneratorEntity generatorSave = modelMapper.map(o, GeneratorEntity.class);
+        //TODO: Validaciones
         generatorSave.setState("Pendiente");
-        generatorSave.setType(type);
+        generatorSave.setType(o.getType());
+        generatorSave.setContact(o.getContact());
         GeneratorEntity generatorEntity = repository.save(generatorSave);
-        //TODO: Aca mandar el correo al cliente
+        //TODO: Aca mandar el correo al cliente con el link de la pag
         return modelMapper.map(generatorEntity,Generator.class);
     }
 
     @Override
     public Generator withdrawalGenerator(String name) {
         GeneratorEntity generatorWithdrawal = repository.getGeneratorEntityByName(name);
+        //TODO: Validaciones
         generatorWithdrawal.setState("Pendiente Baja");
         repository.save(generatorWithdrawal);
         return modelMapper.map(generatorWithdrawal, Generator.class);
@@ -38,23 +41,25 @@ public class GeneratorServiceImpl implements GeneratorService {
     @Override
     public Generator aproveWithdrawalGenerator(Boolean bool, Long id) {
         Optional<GeneratorEntity> generator = repository.findById(id);
+        //TODO: VALIDACIONES
         if(generator.isEmpty()) {
             throw new IllegalArgumentException("No se encontró la solicitud");
         }
         if (!bool) {
             generator.get().setState("Activo");
-            repository.save(generator.get());
         } else {
             generator.get().setState("Inactivo");
+            generator.get().setExitDate(LocalDateTime.now());
         }
-        generator.get().setExitDate(LocalDateTime.now());
         GeneratorEntity generatorEntity = repository.save(generator.get());
+        //Todo: Aca mandar correo
         return modelMapper.map(generatorEntity, Generator.class);
     }
 
     @Override
     public Generator aproveGenerator(Boolean bool, Long id) {
         Optional<GeneratorEntity> generator = repository.findById(id);
+        //TODO:VALIDACIONES
         if(generator.isEmpty()) {
             throw new IllegalArgumentException("No se encontró la solicitud");
         }

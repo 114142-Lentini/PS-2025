@@ -19,6 +19,7 @@ public class Generator {
     private LocalDateTime entryDate;
     private LocalDateTime exitDate;
     private String email;
-    private String contacto;
+    private String contact;
     private String type;
+    private String address;
 }

@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -24,14 +26,15 @@ public class GeneratorController {
         return ResponseEntity.ok("Pong");
     }
     @PostMapping("")
-    public ResponseEntity<String> registrationGenerator(GeneratorDto generatorDto, String type){
+    public ResponseEntity<GeneratorDto> registrationGenerator(@RequestBody GeneratorDto generatorDto){
         try {
-            Generator generator = service.registrationGenerator(generatorDto, type);
+            Generator generator = service.registrationGenerator(generatorDto);
             GeneratorDto generatorDto1 = new GeneratorDto();
-            generatorDto1.setContacto(generator.getContacto());
+            generatorDto1.setContact(generator.getContact());
             generatorDto1.setName(generator.getName());
             generatorDto1.setEmail(generator.getEmail());
-            return ResponseEntity.ok("Solicitud exitosa, se le enviara un correo con los requisitos");
+            //return ResponseEntity.ok("Solicitud exitosa, se le enviara un correo con los requisitos");
+            return ResponseEntity.ok(generatorDto1);
         } catch (Exception exception) {
             throw new IllegalArgumentException("Datos Incorrectos");
         }
@@ -40,7 +43,7 @@ public class GeneratorController {
     public ResponseEntity<String> withdrawalGenerator(String name) {
         try {
             Generator generator = service.withdrawalGenerator(name);
-            return ResponseEntity.ok("Éxito");
+            return ResponseEntity.ok("Solicitud de baja exitosa, se le comunicara cuando sea aprobada");
         } catch (Exception e) {
             throw new IllegalArgumentException("Error al dar de baja");
         }
