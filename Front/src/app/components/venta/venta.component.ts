@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Bolsa} from "../../models/Bolsa";
-import {GeneratorService} from "../../services/services/generator.service";
+import {GeneratorService} from "../../services/Generador/generator.service";
 import {CurrencyPipe} from "@angular/common";
 
 @Component({
@@ -43,12 +43,26 @@ export class VentaComponent {
   }
 
   procesarCompra() {
-    const data = {
-      ...this.formulario.value,
-      total: this.totalCompra
-    };
-    this.generatorService.realizarCompra(data).subscribe(res => {
-      alert('Compra realizada con éxito');
+    const form = this.formulario.value;
+    const bolsaSeleccionada = this.bolsas.find(b => b.id === form.idBolsa);
+
+    if (!bolsaSeleccionada) {
+      alert('Seleccione una bolsa válida');
+      return;
+    }
+
+    const title = 'Bolsas y Precintos'; // o como se llame
+    const unitPrice = this.precioUnitario;
+    const quantity = form.cantidad;
+
+    this.generatorService.realizarCompra({ title, unitPrice, quantity }).subscribe({
+      next: (preference) => {
+        window.location.href = preference.init_point; // Redirige al checkout
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Error al generar la preferencia de pago');
+      }
     });
   }
 

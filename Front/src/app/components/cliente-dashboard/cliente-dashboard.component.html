@@ -1,0 +1,60 @@
+<mat-toolbar color="primary" class="veolia-toolbar">
+  <div class="logo-container">
+    <img src="assets/logo-veolia.png" alt="Logo Empresa" class="logo-img" />
+    <span class="logo-text">Trazabilidad de Residuos</span>
+  </div>
+
+  <span class="spacer"></span>
+
+  <span class="bienvenida">Bienvenido, {{ nombreCliente }}</span>
+  <button mat-button color="accent" (click)="cerrarSesion()">Cerrar sesión</button>
+</mat-toolbar>
+
+<div class="fondo-dashboard">
+  <div class="dashboard-contenido">
+    <h2>Panel del Cliente</h2>
+    <div class="opciones-grid">
+      <mat-card class="opcion-card" (click)="irAVenta()">
+        <mat-icon class="icono">shopping_cart</mat-icon>
+        <h3>Venta de Bolsas</h3>
+        <p>Adquirí las bolsas necesarias para la gestión de tus residuos.</p>
+      </mat-card>
+
+      <mat-card class="opcion-card" (click)="openModal()">
+        <mat-icon class="icono">recycling</mat-icon>
+        <h3>Solicitud de Retiro</h3>
+        <p>Solicitá el retiro de bolsas con residuos desde tu ubicación.</p>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<ng-template #retiroModal>
+  <h2 mat-dialog-title>Solicitud de Retiro</h2>
+
+  <mat-dialog-content [formGroup]="retiroForm" class="form-content">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Cantidad de bolsas</mat-label>
+      <input matInput formControlName="cantidad" type="number" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Fecha de retiro</mat-label>
+      <input matInput formControlName="fecha" [matDatepicker]="picker" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Horario deseado</mat-label>
+      <input matInput formControlName="horario" type="time" />
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-flat-button color="primary" (click)="confirmarRetiro()">Confirmar</button>
+  </mat-dialog-actions>
+</ng-template>
+
+

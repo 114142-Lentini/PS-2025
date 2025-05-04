@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {GeneratorService} from "../../services/services/generator.service";
+import {GeneratorService} from "../../services/Generador/generator.service";
 import {RouterOutlet} from "@angular/router";
 
 @Component({
@@ -37,6 +37,7 @@ export class AltaGeneradorComponent {
       next: (response) => {
         console.log('Respuesta de la API:', response);
         alert('Registro exitoso');
+        this.formulario.reset(); // 🔹 Limpiar los campos
       },
       error: (err) => {
         console.error('Error al registrar:', err);

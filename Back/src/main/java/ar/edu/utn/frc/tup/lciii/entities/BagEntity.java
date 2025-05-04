@@ -14,7 +14,7 @@ public class BagEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name ="Tamano")
+    @Column(name ="Tamanho")
     private String size;
     @Column(name = "precio")
     private Double price;
