@@ -1,40 +1,65 @@
 package ar.edu.utn.frc.tup.lciii.services.impl;
 
 import ar.edu.utn.frc.tup.lciii.services.JwtService;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.GrantedAuthority;
 
+import javax.annotation.PostConstruct;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
 @Service
 public class JwtServiceImpl implements JwtService {
-    private final String secretKey = "clave-secreta-muy-larga";
+    @Value("${jwt.secret}")
+    private String secret;
 
-    public String generateToken(Authentication auth) {
-        UserDetails user = (UserDetails) auth.getPrincipal();
+    private Key key;
+
+    @PostConstruct
+    public void init() {
+        // Inicializa la clave JWT al arrancar el servicio
+        this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public String generateToken(Authentication authentication) {
+        String username = authentication.getName();
+
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + 86400000); // 1 día de expiración
+
         return Jwts.builder()
-                .setSubject(user.getUsername())
-                .claim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // 1 día
-                .signWith(SignatureAlgorithm.HS256, secretKey.getBytes())
+                .setSubject(username)
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
     public String extractUsername(String token) {
-        return Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(token)
-                .getBody().getSubject();
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 
-    public boolean validateToken(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return username.equals(userDetails.getUsername());
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException e) {
+            // Token inválido, expirado, manipulado, etc.
+            return false;
+        }
     }
 }

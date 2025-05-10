@@ -8,5 +8,5 @@ import org.springframework.stereotype.Service;
 public interface JwtService {
     String generateToken(Authentication auth);
     String extractUsername(String token);
-    boolean validateToken(String token, UserDetails userDetails);
+    boolean validateToken(String token);
 }
