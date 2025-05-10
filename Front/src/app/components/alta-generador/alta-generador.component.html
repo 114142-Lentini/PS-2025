@@ -1,0 +1,45 @@
+<div class="registro-container">
+  <div class="registro-left">
+    <h1 class="slogan">Su aliado en la ruta hacia la descarbonización</h1>
+    <p class="subtext">
+      Nuestro compromiso es asegurar el éxito en la implementación de soluciones y garantizar resultados.
+    </p>
+    <button class="btn-conoce">CONOCE MÁS</button>
+  </div>
+
+  <div class="registro-right">
+    <h2 class="form-title">Registro de Cliente</h2>
+    <form [formGroup]="formulario" (ngSubmit)="registrar()">
+
+      <div class="form-group">
+        <label>Nombre Completo</label>
+        <input formControlName="name" type="text" placeholder="Ej: Juan Pérez" />
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input formControlName="email" type="email" placeholder="ejemplo@correo.com" />
+      </div>
+
+      <div class="form-group">
+        <label>Contacto</label>
+        <input formControlName="contact" type="text" placeholder="Ej: +54 9 11 1234 5678" />
+      </div>
+
+      <div class="form-group">
+        <label>Domicilio</label>
+        <input formControlName="address" type="text" placeholder="Ej: Calle Falsa 123" />
+      </div>
+
+      <div class="form-group">
+        <label>Tipo</label>
+        <select formControlName="type">
+          <option value="publico">Público</option>
+          <option value="privado">Privado</option>
+        </select>
+      </div>
+
+      <button type="submit" [disabled]="formulario.invalid" class="btn-registrar">Registrar</button>
+    </form>
+  </div>
+</div>

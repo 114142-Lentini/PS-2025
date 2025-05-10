@@ -1,0 +1,99 @@
+:host {
+  display: block;
+}
+
+.fondo-dashboard {
+  background: linear-gradient(to right, #f2f2f2, #e0e0e0);
+  min-height: calc(100vh - 64px);
+  padding: 40px;
+}
+
+.dashboard-contenido {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h2 {
+  color: #c5001a;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.opciones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.opcion-card {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;
+}
+
+.opcion-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.opcion-card h3 {
+  margin-top: 10px;
+  color: #333;
+}
+
+.opcion-card p {
+  color: #666;
+}
+
+.icono {
+  font-size: 48px;
+  color: #c5001a;
+}
+
+.veolia-toolbar {
+  background-color: #c5001a;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.bienvenida {
+  margin-right: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+
+

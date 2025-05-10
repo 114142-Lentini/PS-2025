@@ -1,0 +1,42 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 250px;
+  background-color: #f7f7f7;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.logo img {
+  width: 140px;
+  margin: 0 auto 20px auto;
+  display: block;
+}
+
+.nav-item {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background-color: #e0e0e0;
+}
+
+.content {
+  padding: 30px;
+  background-color: #fafafa;
+  min-height: 100vh;
+}
+
+h2 {
+  color: #d50000;
+  margin-bottom: 20px;
+}
+
+.tabla {
+  width: 100%;
+  margin-top: 10px;
+}
+

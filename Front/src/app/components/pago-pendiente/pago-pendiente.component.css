@@ -1,0 +1,39 @@
+.veolia-status-container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.status-card {
+  width: 100%;
+  max-width: 450px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+
+  mat-card-title {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  mat-card-content p {
+    font-size: 16px;
+    margin-top: 8px;
+  }
+
+  &.success mat-card-title {
+    color: #001A70;
+  }
+
+  &.error mat-card-title {
+    color: #b0000f;
+  }
+
+  &.pending mat-card-title {
+    color: #ff9900;
+  }
+}
+

@@ -1,0 +1,38 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+mat-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-left: 6px solid #e30613; /* Rojo Veolia */
+}
+
+mat-card-title {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #1a1a1a;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.login-button {
+  width: 100%;
+  background-color: #e30613;
+  color: white;
+  margin-top: 1rem;
+}
+
+.login-button:hover {
+  background-color: #c0000b;
+}
+
+

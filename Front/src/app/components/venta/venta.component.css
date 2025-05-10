@@ -1,0 +1,80 @@
+/* Contenedor general */
+.veolia-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Logo */
+.veolia-logo {
+  display: block;
+  max-width: 150px;
+  margin: 0 auto 20px auto;
+}
+
+/* Título */
+.veolia-titulo {
+  text-align: center;
+  color: #e2001a;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+/* Estilos del formulario */
+.veolia-form .form-group {
+  margin-bottom: 20px;
+}
+
+.veolia-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+.veolia-form input,
+.veolia-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.veolia-form input[disabled] {
+  background-color: #eee;
+  color: #555;
+}
+
+/* Botón */
+.form-actions {
+  text-align: center;
+}
+
+.form-actions button {
+  background-color: #e2001a;
+  color: white;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-actions button:hover:not(:disabled) {
+  background-color: #bb0015;
+}
+
+.form-actions button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
