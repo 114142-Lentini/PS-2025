@@ -24,6 +24,9 @@ export class GeneratorService {
       .set('unitPrice', data.unitPrice.toString())
       .set('quantity', data.quantity.toString());
 
-    return this.http.post<any>('http://localhost:8080/crear-preferencia', null, { params });
+    return this.http.post<any>('http://localhost:8080/Sale/crear-preferencia', null, { params });
+  }
+  getBolsas(): Observable<Bolsa[]> {
+    return this.http.get<Bolsa[]>('http://localhost:8080/Bag');
   }
 }

@@ -6,6 +6,8 @@ import {PagoPendienteComponent} from "./components/pago-pendiente/pago-pendiente
 import {PagoFallidoComponent} from "./components/pago-fallido/pago-fallido.component";
 import {HomeComponent} from "./components/home/home.component";
 import {ClienteDashboardComponent} from "./components/cliente-dashboard/cliente-dashboard.component";
+import {AdminComponent} from "./components/admin/admin.component";
+import {LoginComponent} from "./components/login/login.component";
 
 export const routes: Routes = [
   { path: 'alta', component: AltaGeneradorComponent },
@@ -14,6 +16,8 @@ export const routes: Routes = [
   { path: 'pago-exitoso', component: PagoExitosoComponent },
   { path: 'pago-pendiente', component: PagoPendienteComponent },
   { path: 'pago-fallido', component: PagoFallidoComponent },
-  { path: 'dashboard', component: ClienteDashboardComponent}
+  { path: 'dashboard', component: ClienteDashboardComponent},
+  { path: 'admin', component: AdminComponent },
+  { path: 'login', component: LoginComponent}
 ];
 

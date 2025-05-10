@@ -17,6 +17,7 @@ import {
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatInputModule} from "@angular/material/input";
+import {RetiroService} from "../../services/Retiro/retiro.service";
 
 @Component({
   selector: 'app-cliente-dashboard',
@@ -52,6 +53,7 @@ export class ClienteDashboardComponent {
   nombreCliente = 'Juan Pérez';
   router = inject(Router)
   service = inject(ClienteServiceService)
+  retiroService = inject(RetiroService)
   @ViewChild('retiroModal') retiroModalTemplate: any;
   retiroForm: FormGroup;
   constructor(
@@ -71,13 +73,34 @@ export class ClienteDashboardComponent {
   irASolicitud() {
     this.router.navigate(['/solicitud-retiro']);
   }
-  confirmarRetiro() {
+  confirmarRetiro(): void {
     if (this.retiroForm.valid) {
-      const datos = this.retiroForm.value;
-      console.log('Datos del retiro:', datos);
-      this.dialog.closeAll(); // Cierra el modal
+      const cantidad = this.retiroForm.value.cantidad;
+      const fecha: Date = this.retiroForm.value.fecha;
+      const hora: string = this.retiroForm.value.horario;
+
+      const collectDate = new Date(fecha);
+      collectDate.setHours(0, 0, 0, 0); // aseguramos que solo tenga la fecha
+
+      const dto = {
+        countBags: cantidad,
+        collectDate: collectDate.toISOString(),        // LocalDateTime
+        collectHour: `${hora}:00`                      // LocalTime con segundos
+      };
+
+      this.retiroService.solicitarRetiro(dto).subscribe({
+        next: () => {
+          alert('Retiro solicitado con éxito');
+          this.retiroForm.reset();
+          this.dialog.closeAll();
+        },
+        error: () => {
+          alert('Error al solicitar el retiro');
+        }
+      });
     }
   }
+
   openModal() {
     this.dialog.open(this.retiroModalTemplate);
   }

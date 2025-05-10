@@ -1,24 +1,89 @@
 .veolia-toolbar {
-  background-color: #c5001a; /* Rojo Veolia */
+  background-color: #e2001a;
   color: white;
-}
-
-.logo-text {
+  font-size: 1.4rem;
   font-weight: bold;
-  font-size: 20px;
+  justify-content: center;
 }
 
-.inicio-container {
+.inicio-layout {
+  display: flex;
+  flex-wrap: wrap;
+  height: calc(100vh - 64px);
+  background-color: #f5f5f5;
+  padding: 20px;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    padding: 10px;
+  }
+}
+
+.inicio-texto {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 64px); /* ajustado a toolbar */
-  background-color: #f5f5f5;
   padding: 20px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 }
 
 .inicio-card {
-  max-width: 600px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+  padding: 24px;
+  border-radius: 10px;
+  background-color: white;
+
+  mat-card-title {
+    color: #e2001a;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  mat-card-subtitle {
+    color: #555;
+    margin-bottom: 12px;
+  }
 }
+
+.action-button {
+  background-color: #e2001a;
+  color: white;
+  font-weight: 500;
+
+  &:hover {
+    background-color: #c10016;
+  }
+}
+
+.info-button {
+  color: #e2001a;
+  font-weight: 500;
+}
+
+.inicio-imagen {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+

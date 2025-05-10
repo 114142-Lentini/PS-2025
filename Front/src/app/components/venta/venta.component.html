@@ -1,29 +1,32 @@
-<div class="container">
-  <h2 class="titulo">Compra de Bolsas</h2>
+<div class="veolia-container">
+  <!-- Logo (opcional, si tenés una imagen de Veolia) -->
+  <!-- <img src="assets/veolia-logo.png" alt="Veolia Logo" class="veolia-logo"> -->
 
-  <form [formGroup]="formulario" (ngSubmit)="procesarCompra()">
+  <h2 class="veolia-titulo">Compra de Bolsas</h2>
+
+  <form [formGroup]="formulario" (ngSubmit)="procesarCompra()" class="veolia-form">
     <div class="form-group">
       <label for="idBolsa">Tipo de Bolsa</label>
       <select id="idBolsa" formControlName="idBolsa" (change)="actualizarPrecio()">
-        <option *ngFor="let bolsa of bolsas" [value]="bolsa.id">
-          {{ bolsa.size }} (Stock: {{ bolsa.stock }})
+        <option *ngFor="let bolsa of bolsas; let i = index" [value]="i">
+          {{ bolsa.size }}
         </option>
       </select>
     </div>
 
     <div class="form-group">
       <label for="cantidad">Cantidad</label>
-      <input type="number" id="cantidad" formControlName="cantidad" min="1" />
+      <input type="number" id="cantidad" formControlName="cantidad" min="1" (input)="actualizarPrecio()" />
     </div>
 
     <div class="form-group">
       <label>Precio Unitario</label>
-      <input type="text" [value]="precioUnitario | currency" disabled />
+      <input type="text" [value]="precioUnitario | currency:'ARS'" disabled />
     </div>
 
     <div class="form-group">
       <label>Total a Pagar</label>
-      <input type="text" [value]="totalCompra | currency" disabled />
+      <input type="text" [value]="totalCompra | currency:'ARS'" disabled />
     </div>
 
     <div class="form-actions">
@@ -31,5 +34,6 @@
     </div>
   </form>
 </div>
+
 
 

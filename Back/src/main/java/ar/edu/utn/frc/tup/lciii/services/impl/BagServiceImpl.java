@@ -27,7 +27,8 @@ public class BagServiceImpl implements BagService {
         List<BagEntity> bagEntities = bagRepository.findAll();
         List<Bag> bags = new ArrayList<>();
         for (BagEntity bagEntity : bagEntities) {
-            bags.add(modelMapper.map(bagEntity, Bag.class));
+            Bag bag = modelMapper.map(bagEntity, Bag.class);
+            bags.add(bag);
         }
         return bags;
     }
