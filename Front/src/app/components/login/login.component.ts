@@ -35,21 +35,19 @@ export class LoginComponent {
 
   onLogin(): void {
     if (this.loginForm.invalid) return;
-
     const { email, password } = this.loginForm.value;
-    console.log(email)
-    console.log(password)
+
     this.authService.login(email, password).subscribe({
       next: (response: any) => {
         const token = response.token;
         localStorage.setItem('token', token);
-
         const decodedToken = this.jwtHelper.decodeToken(token);
+        console.log(decodedToken);
         const roles = decodedToken.roles || [];
 
         if (roles.includes('ROLE_ADMIN')) {
           this.router.navigate(['/admin']);
-        } else if (roles.includes('ROLE_CLIENT')) {
+        } else if (roles.includes('ROLE_CLIENTE')) {
           this.router.navigate(['/dashboard']);
         }
       },

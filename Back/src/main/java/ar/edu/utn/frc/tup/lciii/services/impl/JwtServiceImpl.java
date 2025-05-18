@@ -16,6 +16,9 @@ import javax.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class JwtServiceImpl implements JwtService {
@@ -30,17 +33,22 @@ public class JwtServiceImpl implements JwtService {
         this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateToken(Authentication authentication) {
-        String username = authentication.getName();
+    @Override
+    public String generateToken(Authentication auth) {
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
 
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + 86400000); // 1 día de expiración
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("roles", userDetails.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList()));
 
         return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
-                .signWith(key, SignatureAlgorithm.HS256)
+                .setClaims(claims)
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 horas
+                .signWith(SignatureAlgorithm.HS256, secret.getBytes(StandardCharsets.UTF_8))
                 .compact();
     }
 

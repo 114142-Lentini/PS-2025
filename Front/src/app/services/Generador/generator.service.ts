@@ -17,7 +17,12 @@ export class GeneratorService {
     //return this.http.post<Generador>('http://localhost:8080/Generator', generador);
     return this.http.post<Generador>('/Generator', generador);
   }
-
+  getGeneradoresActivos(): Observable<Generador[]> {
+    return this.http.get<Generador[]>('http://localhost:8080/Generator/activos\n');
+  }
+  getGeneradoresPendientes(): Observable<Generador[]> {
+    return this.http.get<Generador[]>('http://localhost:8080/Generator/pendientes');
+  }
   realizarCompra(data: { title: string, unitPrice: number, quantity: number }): Observable<any> {
     const params = new HttpParams()
       .set('title', data.title)

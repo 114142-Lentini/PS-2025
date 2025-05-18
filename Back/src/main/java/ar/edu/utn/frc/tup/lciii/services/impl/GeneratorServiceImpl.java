@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -80,5 +82,25 @@ public class GeneratorServiceImpl implements GeneratorService {
         //Todo: Aca mandar correo
         emailService.enviarCorreo(generatorEntity.getEmail(),"Registro", "Se ha aprobado su solicitud de adhesión al servicio");
         return modelMapper.map(generatorEntity, Generator.class);
+    }
+
+    @Override
+    public List<Generator> getAllACtiveGenerator() {
+        List<GeneratorEntity> generatorEntities = repository.getGeneratorEntityByState("Activo");
+        List<Generator> generators = new ArrayList<>();
+        for (GeneratorEntity generatorEntity : generatorEntities) {
+            generators.add(modelMapper.map(generatorEntity, Generator.class));
+        }
+        return generators;
+    }
+
+    @Override
+    public List<Generator> getAllPendingGenerator() {
+        List<GeneratorEntity> generatorEntities = repository.getGeneratorEntityByState("Pendiente");
+        List<Generator> generators = new ArrayList<>();
+        for (GeneratorEntity generatorEntity : generatorEntities) {
+            generators.add(modelMapper.map(generatorEntity, Generator.class));
+        }
+        return generators;
     }
 }

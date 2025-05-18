@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -35,5 +37,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO findByEmail(String email) {
         return modelMapper.map(repository.findByEmail(email), UserDTO.class);
+    }
+    @Override
+    public UserDTO downUser(String email) {
+        Optional<UserEntity> user = repository.findByEmail(email);
+        if(user.isPresent()) {
+            user.get().setState("Inactivo");
+            UserEntity userSaved = repository.save(user.get());
+            return modelMapper.map(userSaved, UserDTO.class);
+        } else {
+            throw new IllegalArgumentException("No se encontró el usuario");
+        }
+    }
+    @Override
+    public UserDTO changePassword (String password, String email) {
+        Optional<UserEntity> user = repository.findByEmail(email);
+        if(user.isPresent()) {
+            user.get().setPassword(password);
+            UserEntity userSaved = repository.save(user.get());
+            return modelMapper.map(userSaved, UserDTO.class);
+        } else {
+            throw new IllegalArgumentException("No se encontró el usuario");
+        }
     }
 }

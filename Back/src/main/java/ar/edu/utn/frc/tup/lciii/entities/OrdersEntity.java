@@ -1,31 +1,26 @@
 package ar.edu.utn.frc.tup.lciii.entities;
 
-import ar.edu.utn.frc.tup.lciii.models.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Table(name = "Usuarios")
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-
-public class UserEntity {
+@Table(name = "Pedidos_Retiro")
+public class OrdersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id_pedido_retiro", nullable = false)
     private Long id;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "contraseña")
-    private String password;
-    @Enumerated(EnumType.STRING)
-    private Role role;
-    @Column
+    @Column(name = "estado")
     private String state;
+
 }

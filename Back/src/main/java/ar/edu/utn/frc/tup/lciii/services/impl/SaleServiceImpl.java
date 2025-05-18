@@ -3,6 +3,7 @@ package ar.edu.utn.frc.tup.lciii.services.impl;
 import ar.edu.utn.frc.tup.lciii.dtos.SaleDto;
 import ar.edu.utn.frc.tup.lciii.entities.SaleDetailEntity;
 import ar.edu.utn.frc.tup.lciii.entities.SalesEntity;
+import ar.edu.utn.frc.tup.lciii.models.Generator;
 import ar.edu.utn.frc.tup.lciii.models.Sale;
 import ar.edu.utn.frc.tup.lciii.repositories.SaleDetailRepository;
 import ar.edu.utn.frc.tup.lciii.repositories.SaleRepository;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SaleServiceImpl implements SaleService {
@@ -37,5 +40,15 @@ public class SaleServiceImpl implements SaleService {
         SalesEntity saleSave = saleRepository.save(salesEntity);
 
         return modelMapper.map(saleSave, Sale.class);
+    }
+
+    @Override
+    public List<Sale> findByGenerator(Long id) {
+        List<SalesEntity> salesEntities = saleRepository.findByGeneratorId(id);
+        List<Sale> sales = new ArrayList<>();
+        for (SalesEntity salesEntity : salesEntities) {
+            sales.add(modelMapper.map(salesEntities, Sale.class));
+        }
+        return sales;
     }
 }

@@ -6,16 +6,21 @@ import ar.edu.utn.frc.tup.lciii.services.impl.GeneratorServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("Generator")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class GeneratorController {
     @Autowired
     private GeneratorServiceImpl service;
@@ -47,5 +52,23 @@ public class GeneratorController {
         } catch (Exception e) {
             throw new IllegalArgumentException("Error al dar de baja");
         }
+    }
+    @GetMapping("/activos")
+    public ResponseEntity<List<GeneratorDto>> getAllActiveGenerators() {
+        List<Generator> generators = service.getAllACtiveGenerator();
+        List<GeneratorDto> generatorDtos = new ArrayList<>();
+        for (Generator generator : generators) {
+            generatorDtos.add(modelMapper.map(generator, GeneratorDto.class));
+        }
+        return ResponseEntity.ok(generatorDtos);
+    }
+    @GetMapping("/pendientes")
+    public ResponseEntity<List<GeneratorDto>> getAllPendingGenerators() {
+        List<Generator> generators = service.getAllPendingGenerator();
+        List<GeneratorDto> generatorDtos = new ArrayList<>();
+        for (Generator generator : generators) {
+            generatorDtos.add(modelMapper.map(generator, GeneratorDto.class));
+        }
+        return ResponseEntity.ok(generatorDtos);
     }
 }
