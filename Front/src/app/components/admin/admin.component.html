@@ -23,7 +23,12 @@
     <div class="section">
       <h2>Solicitudes de Registro</h2>
       <mat-list>
-        <mat-list-item *ngFor="let solicitud of solicitudes">{{ solicitud.name }}</mat-list-item>
+        <mat-list-item *ngFor="let solicitud of solicitudes">
+          <div class="solicitud-item">
+            <span>{{ solicitud.name }} - <strong>{{ solicitud.state }}</strong></span>
+            <button mat-button color="primary" (click)="aprobarSolicitud(solicitud)">Aprobar</button>
+          </div>
+        </mat-list-item>
       </mat-list>
     </div>
   </div>
@@ -35,30 +40,44 @@
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Vehículo</mat-label>
         <mat-select formControlName="vehiculo">
-          <mat-option *ngFor="let v of vehiculos" [value]="v">{{ v }}</mat-option>
+          <mat-option *ngFor="let v of vehiculos" [value]="v">{{v.type}} ({{ v.patent}})</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="w-full">
+      <mat-form-field>
         <mat-label>Zona</mat-label>
-        <mat-select formControlName="zona">
-          <mat-option *ngFor="let z of zonas" [value]="z">{{ z }}</mat-option>
+        <mat-select (selectionChange)="onZonaSeleccionada($event.value)">
+          <mat-option *ngFor="let zona of zonas" [value]="zona.name">
+            {{ zona.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
+
+
 
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Operario</mat-label>
         <mat-select formControlName="operario">
-          <mat-option *ngFor="let o of operarios" [value]="o">{{ o }}</mat-option>
+          <mat-option *ngFor="let o of operarios" [value]="o">{{ o.name }}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Hora de salida</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="horaSalida">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <input matInput type="time" formControlName="horaSalida">
       </mat-form-field>
+      <div *ngIf="pedidos.length > 0" class="mt-4">
+        <h4>Pedidos de Retiro:</h4>
+        <mat-selection-list formControlName="pedidos">
+          <mat-list-option *ngFor="let pedido of pedidos" [value]="pedido">
+            Generador: {{ pedido.generador }} - Estado: {{ pedido.state }}
+          </mat-list-option>
+        </mat-selection-list>
+        <div *ngIf="pedidos.length === 0 && zonaSeleccionada">
+          <p>No hay pedidos para la zona "{{ zonaSeleccionada }}"</p>
+        </div>
+      </div>
+
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">

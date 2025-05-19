@@ -22,4 +22,5 @@ public class Generator {
     private String contact;
     private String type;
     private String address;
+    private RegisterState state;
 }

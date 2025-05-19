@@ -79,7 +79,7 @@ export class VentaComponent {
 
     this.generatorService.realizarCompra({ title, unitPrice, quantity }).subscribe({
       next: (preference) => {
-        window.location.href = preference.sandboxInitPoint; // Redirige al checkout
+        window.location.href = preference.initPoint; // Redirige al checkout
       },
       error: (err) => {
         console.error(err);

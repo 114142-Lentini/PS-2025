@@ -9,13 +9,13 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "Empleados")
+@Table(name = "Zonas")
 @Data
-public class EmployeesEntity {
+public class ZoneEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Long zoneId;
     @Column (name = "nombre")
     private String name;
 }

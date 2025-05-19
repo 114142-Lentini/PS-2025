@@ -5,7 +5,7 @@ body {
 
 /* Imagen más proporcionada */
 .inicio-imagen img {
-  width: 400px;
+  width: 500px;
   max-width: 100%;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -20,7 +20,7 @@ body {
 }
 
 .veolia-toolbar {
-  background-color: #e2001a; // rojo Veolia
+  background-color: #e2001a;
 color: white;
   display: flex;
   justify-content: center;
@@ -41,7 +41,7 @@ color: white;
   gap: 3rem;
   flex-wrap: wrap;
   background: #f4f4f4;
-  min-height: calc(100vh - 64px); // Restar altura de toolbar
+  min-height: calc(100vh - 64px);
 }
 
 .inicio-texto {
@@ -87,9 +87,9 @@ mat-card-subtitle {
 }
 
 .inicio-imagen img {
-  width: 500px;
+  width: 10000px;
   max-width: 100%;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 

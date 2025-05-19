@@ -27,4 +27,8 @@ export class HomeComponent {
   irADashboard() {
     this.router.navigate(['/login']);
   }
+
+  masInfo() {
+
+  }
 }

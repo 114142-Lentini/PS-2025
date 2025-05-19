@@ -1,4 +1,4 @@
-import {Component, inject, ViewChild} from '@angular/core';
+import {Component, inject, TemplateRef, ViewChild} from '@angular/core';
 import {MatToolbar, MatToolbarModule} from "@angular/material/toolbar";
 import {MatCard, MatCardModule, MatCardTitle} from "@angular/material/card";
 import {Router, RouterLink} from "@angular/router";
@@ -18,6 +18,10 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatInputModule} from "@angular/material/input";
 import {RetiroService} from "../../services/Retiro/retiro.service";
+import {MatList, MatListItem} from "@angular/material/list";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
+import {GeneratorService} from "../../services/Generador/generator.service";
+import {AdminService} from "../../services/Admin/admin.service";
 
 @Component({
   selector: 'app-cliente-dashboard',
@@ -45,16 +49,26 @@ import {RetiroService} from "../../services/Retiro/retiro.service";
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatList,
+    DatePipe,
+    MatListItem,
+    NgIf,
+    NgForOf,
   ],
   templateUrl: './cliente-dashboard.component.html',
   styleUrl: './cliente-dashboard.component.css'
 })
 export class ClienteDashboardComponent {
-  nombreCliente = 'Juan Pérez';
+  nombreCliente = 'Franco';
   router = inject(Router)
   service = inject(ClienteServiceService)
   retiroService = inject(RetiroService)
+  generatorService = inject(GeneratorService)
+
+
   @ViewChild('retiroModal') retiroModalTemplate: any;
+  @ViewChild('historialDialog') historialDialog!: TemplateRef<any>;
+
   retiroForm: FormGroup;
   constructor(
     private dialog: MatDialog,
@@ -111,4 +125,17 @@ export class ClienteDashboardComponent {
   }
 
   protected readonly opener = opener;
+  historial: any;
+
+  verHistorial(): void {
+    this.generatorService.getHistorialCompras().subscribe({
+      next: (data) => {
+        this.historial = data;
+        this.dialog.open(this.historialDialog);
+      },
+      error: (err) => {
+        console.error('Error al cargar el historial de compras:', err);
+      }
+    });
+  }
 }

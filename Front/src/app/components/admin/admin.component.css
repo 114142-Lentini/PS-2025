@@ -66,6 +66,11 @@ h2 {
   font-size: 22px;
   font-weight: 600;
 }
-
+.solicitud-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
 

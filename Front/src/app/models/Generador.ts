@@ -4,4 +4,5 @@ export interface Generador {
   contact: number;
   address: string;
   type: string;
+  state: string;
 }

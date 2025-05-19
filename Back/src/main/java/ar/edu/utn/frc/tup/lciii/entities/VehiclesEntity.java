@@ -6,16 +6,20 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Table(name = "Vehiculos")
 @Entity
-@Table(name = "Empleados")
 @Data
-public class EmployeesEntity {
+public class VehiclesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
-    @Column (name = "nombre")
-    private String name;
+    private Long vehicleId;
+    @Column(name = "patente")
+    private String patent;
+    @Column(name = "tipo")
+    private String type;
 }

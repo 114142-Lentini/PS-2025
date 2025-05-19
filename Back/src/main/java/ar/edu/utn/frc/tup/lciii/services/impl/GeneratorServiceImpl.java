@@ -3,6 +3,7 @@ package ar.edu.utn.frc.tup.lciii.services.impl;
 import ar.edu.utn.frc.tup.lciii.dtos.GeneratorDto;
 import ar.edu.utn.frc.tup.lciii.entities.GeneratorEntity;
 import ar.edu.utn.frc.tup.lciii.models.Generator;
+import ar.edu.utn.frc.tup.lciii.models.RegisterState;
 import ar.edu.utn.frc.tup.lciii.repositories.GeneratorRepository;
 import ar.edu.utn.frc.tup.lciii.services.GeneratorService;
 import ar.edu.utn.frc.tup.lciii.services.SaleService;
@@ -26,7 +27,7 @@ public class GeneratorServiceImpl implements GeneratorService {
     public Generator registrationGenerator(GeneratorDto o) {
         GeneratorEntity generatorSave = modelMapper.map(o, GeneratorEntity.class);
         //TODO: Validaciones
-        generatorSave.setState("Pendiente");
+        generatorSave.setState(RegisterState.PENDIENTE);
         generatorSave.setType(o.getType());
         generatorSave.setContact(o.getContact());
         GeneratorEntity generatorEntity = repository.save(generatorSave);
@@ -40,7 +41,7 @@ public class GeneratorServiceImpl implements GeneratorService {
     public Generator withdrawalGenerator(String name) {
         GeneratorEntity generatorWithdrawal = repository.getGeneratorEntityByName(name);
         //TODO: Validaciones
-        generatorWithdrawal.setState("Pendiente Baja");
+        generatorWithdrawal.setState(RegisterState.PENDIENTE_BAJA);
         repository.save(generatorWithdrawal);
         return modelMapper.map(generatorWithdrawal, Generator.class);
     }
@@ -53,9 +54,9 @@ public class GeneratorServiceImpl implements GeneratorService {
             throw new IllegalArgumentException("No se encontró la solicitud");
         }
         if (!bool) {
-            generator.get().setState("Activo");
+            generator.get().setState(RegisterState.ACTIVO);
         } else {
-            generator.get().setState("Inactivo");
+            generator.get().setState(RegisterState.INACTIVO);
             generator.get().setExitDate(LocalDateTime.now());
         }
         GeneratorEntity generatorEntity = repository.save(generator.get());
@@ -72,10 +73,10 @@ public class GeneratorServiceImpl implements GeneratorService {
             throw new IllegalArgumentException("No se encontró la solicitud");
         }
         if (!bool) {
-                generator.get().setState("No Aprobado");
+                generator.get().setState(RegisterState.PENDIENTE);
                 repository.save(generator.get());
         } else {
-            generator.get().setState("Activo");
+            generator.get().setState(RegisterState.ACTIVO);
         }
         generator.get().setEntryDate(LocalDateTime.now());
         GeneratorEntity generatorEntity = repository.save(generator.get());
@@ -86,7 +87,7 @@ public class GeneratorServiceImpl implements GeneratorService {
 
     @Override
     public List<Generator> getAllACtiveGenerator() {
-        List<GeneratorEntity> generatorEntities = repository.getGeneratorEntityByState("Activo");
+        List<GeneratorEntity> generatorEntities = repository.getGeneratorEntityByState(RegisterState.ACTIVO);
         List<Generator> generators = new ArrayList<>();
         for (GeneratorEntity generatorEntity : generatorEntities) {
             generators.add(modelMapper.map(generatorEntity, Generator.class));
@@ -96,7 +97,7 @@ public class GeneratorServiceImpl implements GeneratorService {
 
     @Override
     public List<Generator> getAllPendingGenerator() {
-        List<GeneratorEntity> generatorEntities = repository.getGeneratorEntityByState("Pendiente");
+        List<GeneratorEntity> generatorEntities = repository.getGeneratorEntityByState(RegisterState.PENDIENTE);
         List<Generator> generators = new ArrayList<>();
         for (GeneratorEntity generatorEntity : generatorEntities) {
             generators.add(modelMapper.map(generatorEntity, Generator.class));
