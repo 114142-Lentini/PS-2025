@@ -9,4 +9,8 @@ public interface UserService {
     UserDTO registerUser(UserDTO userDTO);
     UserDTO loginUser(UserDTO userDTO);
     UserDTO findByEmail(String email);
+
+    UserDTO downUser(String email);
+
+    UserDTO changePassword(String password, String email);
 }

@@ -8,6 +8,7 @@ import com.mercadopago.client.preference.PreferenceRequest;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Service
 public class MercadoPagoServiceImpl implements MercadoPagoService {
+
     public Preference createPreference(String title, BigDecimal unitPrice, int quantity) throws MPException, MPApiException {
         PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
                 .title(title)

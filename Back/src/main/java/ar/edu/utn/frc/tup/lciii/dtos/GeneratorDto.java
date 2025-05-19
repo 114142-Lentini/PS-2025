@@ -19,4 +19,5 @@ public class GeneratorDto {
     private String contact;
     private String address;
     private String type;
+    private String state;
 }

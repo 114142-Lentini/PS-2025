@@ -11,7 +11,8 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoadmapDto {
-    private Integer countBags;
-    private LocalDateTime collectDate;
+    private String zone;
     private String collectHour;
+    private String employee;
+    private String vehicle;
 }

@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -22,10 +24,11 @@ public class SalesEntity {
     private LocalDateTime date;
     @Column(name = "tipo")
     private String type;
-    @Column(name = "id_generador")
-    private Long generatorId;
     @Column(name = "total_compra")
     private Double totalBuy;
     @Column(name = "fecha_rendicion_vta")
     private LocalDateTime capitulationDate;
+    @ManyToOne
+    @JoinColumn(name = "generatorId", nullable = false)
+    private GeneratorEntity generatorEntity;
 }

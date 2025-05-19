@@ -14,9 +14,11 @@ export class AuthService {
   login(email: string, password: string): Observable<any> {
     return this.http.post<{ token: string }>(
       'http://localhost:8080/auth/login',
-      { email, password }
+      { email, password },
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
     );
   }
+
 
   logout(): void {
     localStorage.removeItem('token');

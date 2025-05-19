@@ -1,89 +1,151 @@
+/* Fondo general más agradable */
+body {
+  background: linear-gradient(to bottom right, #f9fafc, #e5e7eb);
+}
+
+/* Imagen más proporcionada */
+.inicio-imagen img {
+  width: 500px;
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Responsivo: ajustar imagen aún más en pantallas pequeñas */
+@media (max-width: 768px) {
+  .inicio-imagen img {
+    width: 90%;
+    margin-top: 1.5rem;
+  }
+}
+
 .veolia-toolbar {
   background-color: #e2001a;
-  color: white;
-  font-size: 1.4rem;
-  font-weight: bold;
+color: white;
+  display: flex;
   justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.logo-text {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .inicio-layout {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem;
+  gap: 3rem;
   flex-wrap: wrap;
-  height: calc(100vh - 64px);
-  background-color: #f5f5f5;
-  padding: 20px;
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    flex-direction: column-reverse;
-    padding: 10px;
-  }
+  background: #f4f4f4;
+  min-height: calc(100vh - 64px);
 }
 
 .inicio-texto {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-
-  @media (max-width: 768px) {
-    padding: 10px;
-  }
+  flex: 1 1 45%;
+  animation: fadeInUp 0.8s ease-in-out;
 }
 
 .inicio-card {
-  width: 100%;
-  max-width: 500px;
-  padding: 24px;
-  border-radius: 10px;
-  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: white;
+  transition: transform 0.3s ease;
+  max-width: 600px;
+}
 
-  mat-card-title {
-    color: #e2001a;
-    font-size: 1.6rem;
-    font-weight: 600;
-  }
+.inicio-card:hover {
+  transform: translateY(-5px);
+}
 
-  mat-card-subtitle {
-    color: #555;
-    margin-bottom: 12px;
-  }
+mat-card-title {
+  font-size: 1.6rem;
+  color: #333;
+}
+
+mat-card-subtitle {
+  font-size: 1rem;
+  color: #888;
 }
 
 .action-button {
-  background-color: #e2001a;
+  font-weight: bold;
   color: white;
-  font-weight: 500;
-
-  &:hover {
-    background-color: #c10016;
-  }
 }
 
 .info-button {
-  color: #e2001a;
-  font-weight: 500;
+  margin-left: 10px;
 }
 
 .inicio-imagen {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+  flex: 1 1 40%;
+  text-align: center;
+  animation: fadeInRight 1s ease-in-out;
+}
 
-  @media (max-width: 768px) {
-    padding: 10px;
-    margin-bottom: 10px;
+.inicio-imagen img {
+  width: 10000px;
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-
-  img {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 🔁 Estilo responsivo */
+@media (max-width: 768px) {
+  .inicio-layout {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .inicio-card {
+    max-width: 100%;
+  }
+
+  .inicio-imagen img {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .inicio-texto {
+    width: 100%;
+  }
+
+  .action-button,
+  .info-button {
+    width: 80%;
+    margin: 0.5rem auto;
+    display: block;
+    text-align: center;
+  }
+}
+
+
+
 

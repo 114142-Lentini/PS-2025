@@ -25,6 +25,10 @@ import {Router} from "@angular/router";
 export class HomeComponent {
   router = inject(Router)
   irADashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/login']);
+  }
+
+  masInfo() {
+
   }
 }

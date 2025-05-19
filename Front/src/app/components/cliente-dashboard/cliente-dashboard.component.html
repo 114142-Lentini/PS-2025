@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="veolia-toolbar">
   <div class="logo-container">
-    <img src="https://www.hicom-asia.com/simultaneous-interpretation-mission-for-veolia-beijing/" alt="Logo Empresa" class="logo-img" />
+    <img src="assets/veolia-environnement--600.png" alt="Logo Empresa" class="logo-img" />
     <span class="logo-text">Trazabilidad de Residuos</span>
   </div>
 
@@ -25,9 +25,43 @@
         <h3>Solicitud de Retiro</h3>
         <p>Solicitá el retiro de bolsas con residuos desde tu ubicación.</p>
       </mat-card>
+      <!-- NUEVA CARD -->
+      <mat-card class="opcion-card" (click)="verHistorial()">
+        <mat-icon class="icono">history</mat-icon>
+        <h3>Historial de Compras</h3>
+        <p>Consultá tu historial de compras anteriores.</p>
+      </mat-card>
     </div>
   </div>
 </div>
+<ng-template #historialDialog>
+  <div mat-dialog-content class="historial-dialog-container">
+    <div class="historial-header">
+      <mat-icon color="primary">history</mat-icon>
+      <h3>Historial de Compras</h3>
+    </div>
+
+    <div class="pedido-item">
+      <mat-icon color="primary">shopping_bag</mat-icon>
+      <div>
+        <strong>Pedido #1</strong>
+        <p class="fecha">12/05/2024</p>
+      </div>
+    </div>
+
+    <div class="pedido-item">
+      <mat-icon color="primary">shopping_bag</mat-icon>
+      <div>
+        <strong>Pedido #2</strong>
+        <p class="fecha">08/04/2024</p>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="primary">Cerrar</button>
+  </div>
+</ng-template>
 <!-- Modal -->
 <ng-template #retiroModal>
   <h2 mat-dialog-title>Solicitud de Retiro</h2>
